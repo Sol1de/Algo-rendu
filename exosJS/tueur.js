@@ -26,7 +26,7 @@ function getSurvivant() {
 
 function getCaractéristiques() {
     let nom_caractéristique = caractéristiques[Math.floor(Math.random() * caractéristiques.length)]
-    caractéristiques.splice(nom_caractéristique)
+    caractéristiques.splice(caractéristiques.indexOf(nom_caractéristique))
     return nom_caractéristique
 }
 
