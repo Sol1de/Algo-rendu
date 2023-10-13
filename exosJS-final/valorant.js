@@ -52,19 +52,25 @@ function random_GLOBAL() {
 
 //fonction manche
 function manche() {
+    //On initialise la valeur de la bombes a false
     let spike = false
-    let equipe_mort = list_GLOBAL
 
+    //Tant que les 2 equipes n'ont pas 13 victoires on continue les manches
     while (ATK < 13 && DEF < 13) {
 
+        //Reinitialisation des joueurs en debut de partie 
         list_ATK = [Omen_ATK, Phoenix_ATK, Jett_ATK, Fade_ATK, Chamber_ATK]
         list_DEF = [Omen_DEF, Phoenix_DEF, Jett_DEF, Fade_DEF, Chamber_DEF]
-        joueur_random_1 = null
 
+        //Initialisation des variables de la manche
+        joueur_random_1 = null //Joueur mettant les degats
+        let kill = null //Equipe du joueur mort
+
+        //Initialisation de la manche
         manches += 1
         console.log("La manche " + manches + " commence !")
      
-        //un joueur aleatoire tue un joueur aleatoire de l'equipe adverse
+        //On définis l'equipe du joueur qui va tuer un joueur de l'equipe adverse
         equipe_random = random_GLOBAL()
         if(equipe_random == list_ATK) {
             equipe_random = "ATK"
@@ -76,8 +82,8 @@ function manche() {
             joueur_random_1 = random_list(list_DEF)
         }  
 
-        let kill = null
 
+        //un joueur aleatoire tue un joueur aleatoire de l'equipe adverse
         if (equipe_random == "ATK") {
             kill = "DEF"
             let joueur_random_2 = random_list(list_DEF)
@@ -93,7 +99,6 @@ function manche() {
         }
 
         //On verifie l'equipe du joueur mort et on applique les pourcentages correspondants a l'amorçage du spike
-        
         if (kill === "ATK") {
             let proba = Math.random()
 
@@ -144,6 +149,7 @@ function manche() {
                 }
             }
 
+            //Sinon l'avantage est repartie equitablement entre les 2 equipes
             else {
                 proba = Math.random()
 
@@ -163,6 +169,7 @@ function manche() {
             }
         }
 
+        //On verifie quelle equipe a gagné la manche
         if (list_ATK.length == 0) {
             DEF += 1
             console.log("L'equipe Defenseur a gagné la manche ! Ils ont un total de " + DEF + " Victoires !")
@@ -174,6 +181,7 @@ function manche() {
         }
     }
     
+    //On verifie quelle equipe a gagné la partie
     if(ATK == 13) {
         console.log("L'equipe Attaquant a gagné la partie ! pour un total de " + DEF + " Défaites !")
     }
